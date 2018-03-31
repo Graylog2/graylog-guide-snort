@@ -1,0 +1,47 @@
+#################################
+# Pfsense system syslog example #
+#################################
+rule "Extract Snort alert fields"
+when
+has_field("message")
+then
+let m = regex("snort\\[(\\d+)\\]:\\s\\[(\\d+):(\\d+):(\\d+)\\] (.+?) \\[Classification: (.+?)\\] \\[Priority: (\\d+)] \\{(.+?)\\} (\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(\\d{1,5}))? -> (\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(\\d{1,5}))?\\R?", to_string($message.message));
+
+set_field("snort_alert", true);
+set_field("process_id", m["0"]);
+set_field("generator_id", m["1"]);
+set_field("signature_id", m["2"]);
+set_field("signature_revision_id", m["3"]);
+set_field("description", m["4"]);
+set_field("classification", m["5"]);
+set_field("priority", to_long(m["6"]));
+set_field("protocol", m["7"]);
+set_field("src_addr", m["8"]);
+set_field("src_port", to_long(m["10"]));
+set_field("dst_addr", m["11"]);
+set_field("dst_port", to_long(m["13"]));
+end
+
+############################
+# Barnyard2 Direct Example #
+############################
+rule "Extract Snort alert fields"
+when
+has_field("message")
+then
+let m = regex("\\s?\\[(\\d+):(\\d+):(\\d+)\\] (.+?) \\[Classification: (.+?)\\] \\[Priority: (\\d+)]: \\<(.+?)\\> \\{(.+?)\\} (\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(\\d{1,5}))? -> (\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(\\d{1,5}))?\\R?", to_string($message.message));
+
+set_field("snort_alert", true);
+set_field("generator_id", m["0"]);
+set_field("signature_id", m["1"]);
+set_field("signature_revision_id", m["2"]);
+set_field("description", m["3"]);
+set_field("classification", m["4"]);
+set_field("priority", to_long(m["5"]));
+set_field("interface", m["6"]);
+set_field("protocol", m["7"]);
+set_field("src_addr", m["8"]);
+set_field("src_port", to_long(m["10"]));
+set_field("dst_addr", m["11"]);
+set_field("dst_port", to_long(m["13"]));
+end
