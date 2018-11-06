@@ -4,7 +4,7 @@ This guide describes how to send structured Snort IDS alert logs into Graylog.
 
 ![](https://s3.amazonaws.com/graylogblog/snort_integration/dashboard.png)
 
-A blog post with use-cases can be found on the Graylog Blog: [Visualize and Correlate IDS Alerts with Open Source Tools](https://www.graylog.org/blog/64-visualize-and-correlate-ids-alerts-with-open-source-tools)
+A blog post with use-cases can be found on the Graylog Blog: [Visualize and Correlate IDS Alerts with Open Source Tools](https://www.graylog.org/post/visualize-and-correlate-ids-alerts-with-open-source-tools)
 
 ## Configuring Snort
 
