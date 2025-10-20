@@ -1,3 +1,7 @@
+# This guide has been archived.
+The information in this guide is very old and likely no longer applicable to current versions of Graylog. 
+Please take that into account when reading the following content.
+
 # How to send Snort IDS alert logs into Graylog
 
 This guide describes how to send structured Snort IDS alert logs into Graylog.
